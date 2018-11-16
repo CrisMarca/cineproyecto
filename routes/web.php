@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('hola', function () {
-    return "hola que onda";
+Route::resource('/inicio', 'CineController');
+Route::post('inicio2', 'PeliculaController@store');
+Route::get('/', function () {
+    return view('welcome');
 });
-Route::resource('inicio', 'CineController');

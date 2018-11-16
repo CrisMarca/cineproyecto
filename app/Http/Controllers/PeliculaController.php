@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pelicula;
 
 class PeliculaController extends Controller
 {
@@ -13,7 +14,7 @@ class PeliculaController extends Controller
      */
     public function index()
     {
-        //
+     
     }
 
     /**
@@ -23,7 +24,7 @@ class PeliculaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -34,7 +35,16 @@ class PeliculaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $peliculas = new Pelicula();
+        $peliculas->clasificacion = $request->input('clasificacion');
+        $peliculas->nombre = $request->input('pelicula');    
+        $peliculas->año = $request->input('año');
+        $peliculas->genero = $request->input('genero');
+        $peliculas->director = $request->input('director');
+        $peliculas->descripcion = $request->input('descripcion');
+        $peliculas->save();
+        
+        return 'saved';
     }
 
     /**

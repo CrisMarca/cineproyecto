@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Pelicula;
 
 class CineController extends Controller
 {
@@ -13,7 +14,7 @@ class CineController extends Controller
      */
     public function index()
     {
-        //
+        return view('vista.create');
     }
 
     /**
@@ -23,7 +24,7 @@ class CineController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
