@@ -15,8 +15,8 @@ class CreateCartelerasTable extends Migration
     {
         Schema::create('carteleras', function (Blueprint $table) {
             $table->increments('id');
-            $table->char('pelicula',60);
-            $table->date('fecha');
+            $table->char('pelicula',60)->unique();
+            $table->integer('fecha');
             $table->timestamps();
         });
     }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Pelicula;
+use App\Cine;
 
 class CineController extends Controller
 {
@@ -14,9 +14,9 @@ class CineController extends Controller
      */
     public function index()
     {
-        return view('vista.create');
+        $cines = Cine::all();
+        return view('cine.show', compact('cines'));
     }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -24,7 +24,7 @@ class CineController extends Controller
      */
     public function create()
     {
-        
+       return view ('cine.create');
     }
 
     /**
@@ -35,7 +35,14 @@ class CineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $cines = new Cine();
+        $cines->nombre = $request->input('nombre');
+        $cines->telefono= $request->input('telefono');
+        $cines->direccion= $request->input('direccion');
+
+        $cines->save();
+        $cines = Cine::all();
+        return view('cine.show', compact('cines'));
     }
 
     /**
@@ -46,8 +53,10 @@ class CineController extends Controller
      */
     public function show($id)
     {
-        //
+        $cines = Cine::find($id);
+        return view('cine.edit', compact('cines'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -69,7 +78,14 @@ class CineController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $cines = Cine::find($id);
+        $cines ->nombre=$request->input('nombre');
+        $cines ->telefono=$request->input('telefono');
+        $cines ->direccion=$request->input('direccion');
+
+        $cines ->save();
+        $cines = Cine::all();
+        return view('cine.show', compact('cines'));
     }
 
     /**
@@ -80,6 +96,9 @@ class CineController extends Controller
      */
     public function destroy($id)
     {
-        //
+         $cines = Cine::find($id);
+        $cines -> delete();
+        $cines = Cine::all();
+        return view('cine.show', compact('cines'));
     }
 }

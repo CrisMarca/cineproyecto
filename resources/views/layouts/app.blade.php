@@ -9,18 +9,37 @@
 
 	<div class="page-header"><br>		
 		<h3>&nbsp&nbsp&nbsp&nbspCine "Megalodon"</h3>
-	</div>
+	</div><br>
+
 	<div class="col-md-12">				
 		<ul class="nav nav-tabs">
 		  	<li class="nav-item">
 		    	<a class="nav-link active" href="#">Inicio</a>
 		  	</li>
 		  	<li class="nav-item">
-			    <a class="nav-link" href="#">Contactanos</a>
+		    	<a class="nav-link" href="{{ route('pelicula.index') }}">Peliculas</a>
 		  	</li>
 		  	<li class="nav-item">
-		    	<a class="nav-link" href="#">Mas Informacion</a>
-		  	</li>		  	
+			    <a class="nav-link" href="{{ route('pelicula.create') }}">Nueva Pelicula</a>
+		  	</li>
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('cartelera.index') }}">Cartelera</a>
+		  	</li>
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('cartelera.create') }}">Nueva Cartelera</a>
+		  	</li>	
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('sala.index') }}">Salas</a>
+		  	</li>	  	
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('sala.create') }}">Nueva Sala</a>
+		  	</li>
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('cine.index') }}">Cines</a>
+		  	</li>
+		  	<li class="nav-item">
+		    	<a class="nav-link" href="{{ route('cine.create') }}">Nuevo Cine</a>
+		  	</li>
 		</ul>	
 	</div>		
 	<br><br>	

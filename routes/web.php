@@ -11,8 +11,12 @@
 |
 */
 
-Route::resource('/inicio', 'CineController');
-Route::post('inicio2', 'PeliculaController@store');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::resource('/pelicula', 'PeliculaController');
+
+Route::resource('/cartelera', 'CarteleraController');
+
+Route::resource('/funcion', 'FuncionController');
+
+Route::resource('/cine', 'CineController');
+
+Route::resource('/sala', 'SalaController');

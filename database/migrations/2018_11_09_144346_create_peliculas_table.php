@@ -17,10 +17,10 @@ class CreatePeliculasTable extends Migration
             $table->increments('id');
             $table->char('clasificacion',60);
             $table->char('nombre',60);
-            $table->date('año');
+            $table->integer('año');
             $table->char('genero',60);
             $table->char('director',60);
-            $table->char('descripcion',60);
+            $table->char('descripcion',200);
             $table->timestamps();
         });
     }

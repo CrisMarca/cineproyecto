@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Cartelera;
+use App\Pelicula;
 
 class CarteleraController extends Controller
 {
@@ -13,7 +15,8 @@ class CarteleraController extends Controller
      */
     public function index()
     {
-        //
+        $carteleras = Cartelera::all();
+        return view('cartelera.show', compact('carteleras'));
     }
 
     /**
@@ -23,7 +26,8 @@ class CarteleraController extends Controller
      */
     public function create()
     {
-        //
+        $peliculas = Pelicula::all();
+        return view('cartelera.create', compact('peliculas'));
     }
 
     /**
@@ -34,7 +38,13 @@ class CarteleraController extends Controller
      */
     public function store(Request $request)
     {
-       
+       $carteleras = new Cartelera();
+       $carteleras->pelicula = $request->input('pelicula');
+       $carteleras->fecha = $request->input('fecha');
+
+        $carteleras->save();
+        $carteleras = Cartelera::all();
+        return view('cartelera.show', compact('carteleras'));
     }
 
     /**
@@ -45,7 +55,8 @@ class CarteleraController extends Controller
      */
     public function show($id)
     {
-        //
+        $carteleras = Cartelera::find($id);
+        return view('cartelera.edit', compact('carteleras'));
     }
 
     /**
@@ -68,7 +79,13 @@ class CarteleraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $carteleras = Cartelera::find($id);
+        $carteleras -> pelicula=$request->input('pelicula');
+        $carteleras -> fecha=$request->input('fecha');
+
+        $carteleras ->save();
+        $carteleras = Cartelera::all();
+        return view('cartelera.show', compact('carteleras'));
     }
 
     /**
@@ -79,6 +96,9 @@ class CarteleraController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $carteleras = Cartelera::find($id);
+        $carteleras -> delete();
+        $carteleras = Cartelera::all();
+        return view('cartelera.show', compact('carteleras'));
     }
 }

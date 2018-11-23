@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Funcion;
 
 class FuncionController extends Controller
 {
@@ -13,7 +14,7 @@ class FuncionController extends Controller
      */
     public function index()
     {
-        return view('vista.menu');
+        return view('funcion.create');
     }
 
     /**
@@ -34,7 +35,14 @@ class FuncionController extends Controller
      */
     public function store(Request $request)
     {
-       
+        $funciones = new Funcion();        
+        
+        $funciones->hora_inicio = $request->input('inicio');
+        $funciones->hora_fin = $request->input('fin');  
+        $funciones->save();
+
+        $funciones = funcion::all();
+        return 'funciona';
     }
 
     /**

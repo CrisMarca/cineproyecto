@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Pelicula;
+use App\Http\Requests\PeliculaRequest;
 
 class PeliculaController extends Controller
 {
@@ -14,7 +15,8 @@ class PeliculaController extends Controller
      */
     public function index()
     {
-     
+        $peliculas = Pelicula::all();
+        return view('pelicula.menu', compact('peliculas'));
     }
 
     /**
@@ -24,7 +26,7 @@ class PeliculaController extends Controller
      */
     public function create()
     {
-        
+        return view('pelicula.create');
     }
 
     /**
@@ -33,18 +35,26 @@ class PeliculaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PeliculaRequest $request)
     {
-        $peliculas = new Pelicula();
+        if($request->hasFile('archivo')){
+            $file = $request->file('archivo');
+            $name = time().$file->getClientOriginalName();
+            $file->move(public_path().'/images', $name);
+        }
+        $peliculas = new Pelicula();        
+        $peliculas->avatar = $name;
         $peliculas->clasificacion = $request->input('clasificacion');
-        $peliculas->nombre = $request->input('pelicula');    
-        $peliculas->año = $request->input('año');
+        $peliculas->nombre = $request->input('pelicula');  
+        $peliculas->año= $request->input('año');           
         $peliculas->genero = $request->input('genero');
         $peliculas->director = $request->input('director');
         $peliculas->descripcion = $request->input('descripcion');
+        
         $peliculas->save();
         
-        return 'saved';
+        $peliculas = Pelicula::all();
+        return view('pelicula.menu', compact('peliculas'));
     }
 
     /**
@@ -55,7 +65,8 @@ class PeliculaController extends Controller
      */
     public function show($id)
     {
-        //
+        $peliculas = Pelicula::find($id);
+        return view('pelicula.show', compact('peliculas'));
     }
 
     /**
@@ -64,9 +75,10 @@ class PeliculaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id)    
     {
-        //
+        $peliculas = Pelicula::find($id);
+        return view('pelicula.edit', compact('peliculas'));
     }
 
     /**
@@ -76,9 +88,27 @@ class PeliculaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $peliculas =Pelicula::find($id);
+        if($request->hasFile('archivo')){
+            $file = $request->file('archivo');
+            $name = time().$file->getClientOriginalName();
+            $peliculas->avatar =$name;
+            $file->move(public_path().'/images', $name);
+        }
+
+        $peliculas -> nombre=$request->input('pelicula');
+        $peliculas -> descripcion=$request->input('descripcion');
+        $peliculas -> clasificacion=$request->input('clasificacion');
+        $peliculas -> año=$request->input('año');
+        $peliculas -> director=$request->input('director');
+        
+        
+        $peliculas -> save();
+
+        $peliculas = Pelicula::all();
+        return view('pelicula.menu', compact('peliculas'));
     }
 
     /**
@@ -89,6 +119,12 @@ class PeliculaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
+        $peliculas = Pelicula::find($id);
+        $peliculas -> delete();
+        $file_path = public_path().'/images/'.$peliculas->avatar;
+        \File::delete($file_path);        
+        $peliculas = Pelicula::all();
+        return view('pelicula.menu', compact('peliculas'));
     }
 }
