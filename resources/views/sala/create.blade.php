@@ -15,17 +15,27 @@
 	
 		<div class="form-group">
 			<center><h2>Registro de Sala</h2></center><br>
-			<label for="">Ingrese el nombre de su pelicula : </label>			
-			<input type="text" name="pelicula" class="form-control" placeholder="Ingrese el nombre de su pelicula">
-			<label for="">Ingrese el numero de sala: </label>			
-			<select name="sala" id="">
-				<option value="1">sala1</option>
-				<option value="2">sala2</option>
-				<option value="3">sala3</option>
-				<option value="4">sala4</option>
-			</select>
-			<label for="">Ingrese el numero de asientos : </label>			
-			<input type="text" name="asiento" class="form-control" placeholder="Ingrese el numero de asiento">
+			<label for="">Ingrese el nombre de su pelicula : </label><br>
+			<select name="pelicula">
+				<option value="" disabled selected>Seleccione el nombre de su pelicula</option>
+				@foreach ($peliculas as $pelicula)
+					<option value="{{$pelicula -> nombre}}">{{$pelicula -> nombre}}</option>			
+				@endforeach
+			</select><br><br>
+			<label for="">Ingrese el numero de sala: </label><br>
+			<select name="sala" >
+				<option value="" disabled selected>Seleccione el numero de sala para la pelicula</option>
+				<option value="1">Sala 1</option>
+				<option value="2">Sala 2</option>
+				<option value="3">Sala 3</option>
+				<option value="4">Sala 4</option>
+			</select><br><br>
+			<label for="">Ingrese el numero de asientos : </label><br>
+			<select name="asiento">
+				<option value="" disabled selected>Seleccione el numero de asiento </option>
+				<option value="70">70</option>
+				<option value="80">80</option>
+			</select><br><br>
 			
 		</div>
 		<button type="submit" class="btn btn-primary">Guardar</button>	

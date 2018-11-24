@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Sala;
+use App\Pelicula;
 use App\Http\Requests\SalaRequest;
 
 class SalaController extends Controller
@@ -26,7 +27,8 @@ class SalaController extends Controller
      */
     public function create()
     {
-        return view ('sala.create');
+        $peliculas = Pelicula::all();
+        return view ('sala.create', compact('peliculas'));
     }
 
     /**
